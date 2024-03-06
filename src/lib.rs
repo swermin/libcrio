@@ -236,11 +236,9 @@ impl Cli {
                         }
                     }
                 }
-                return Err(format!("no images matched in crictl img {:?}", log_args));
+                Err(format!("no images matched in crictl img {:?}", log_args))
             }
-            None => {
-                return Err(format!("no images found in crictl img {:?}", log_args));
-            }
+            None => Err(format!("no images found in crictl img {:?}", log_args)),
         }
     }
 
@@ -327,12 +325,10 @@ impl Cli {
 fn slice_to_value(slice: &[u8], args: Vec<&str>) -> Result<Value, String> {
     match serde_json::from_slice(slice) {
         Ok(v) => Ok(v),
-        Err(e) => {
-            return Err(format!(
-                "failed to create output from slice for {:?} {}",
-                args, e
-            ));
-        }
+        Err(e) => Err(format!(
+            "failed to create output from slice for {:?} {}",
+            args, e
+        )),
     }
 }
 
@@ -383,12 +379,10 @@ fn run_command_text(args: Vec<&str>, bin_path: &str) -> Result<String, String> {
     // }
     let mut ok_str = String::new();
     match waiter.stdout.as_slice().read_to_string(&mut ok_str) {
-        Err(e) => {
-            return Err(format!(
-                "stdout error - failed to execute crictl {:?} {}",
-                args, e
-            ));
-        }
+        Err(e) => Err(format!(
+            "stdout error - failed to execute crictl {:?} {}",
+            args, e
+        )),
         Ok(_) => Ok(ok_str),
     }
 }
@@ -599,7 +593,9 @@ mod tests {
     fn test_inspect_container() {
         for cli in get_clis() {
             let val = cli
-                .inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7")
+                .inspect_container(
+                    "765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7",
+                )
                 .unwrap();
             assert_eq!(val["info"]["pid"].as_i64().unwrap(), 254405)
         }
@@ -617,8 +613,8 @@ mod tests {
     #[test]
     fn test_inspect_container_only_errors_cli() {
         let cli = get_only_errors_cli();
-        let val =
-            cli.inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7");
+        let val = cli
+            .inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7");
         let expected = Err(String::from("failed to create output from slice for [\"inspect\", \"765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7\"] EOF while parsing a value at line 2 column 0"));
         assert_eq!(expected, val);
     }
@@ -626,8 +622,8 @@ mod tests {
     #[test]
     fn test_inspect_container_bad_json_cli() {
         let cli = get_bad_json_cli();
-        let val =
-            cli.inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7");
+        let val = cli
+            .inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7");
         let expected = Err(String::from("failed to create output from slice for [\"inspect\", \"765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7\"] EOF while parsing a value at line 2 column 0"));
         assert_eq!(expected, val);
     }
