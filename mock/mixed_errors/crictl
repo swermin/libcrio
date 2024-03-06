@@ -822,3 +822,451 @@ if [ "$cmd" = "logs" ]
 then
 echo "An error message" > /dev/stderr
 fi
+
+if [ "$cmd" = "inspect" ]
+then
+echo '{
+  "status": {
+    "id": "765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7",
+    "metadata": {
+      "attempt": 0,
+      "name": "debugger-7w45n"
+    },
+    "state": "CONTAINER_RUNNING",
+    "createdAt": "2024-03-04T13:14:36.051981351Z",
+    "startedAt": "2024-03-04T13:14:36.138188085Z",
+    "finishedAt": "0001-01-01T00:00:00Z",
+    "exitCode": 0,
+    "image": {
+      "annotations": {},
+      "image": "docker.io/library/ubuntu:latest"
+    },
+    "imageRef": "docker.io/library/ubuntu@sha256:f9d633ff6640178c2d0525017174a688e2c1aef28f0a0130b26bd5554491f0da",
+    "reason": "",
+    "message": "",
+    "labels": {
+      "io.kubernetes.container.name": "debugger-7w45n",
+      "io.kubernetes.pod.name": "test-g8xb9-59dl6",
+      "io.kubernetes.pod.namespace": "main",
+      "io.kubernetes.pod.uid": "b7c37a2c-db29-47d3-9550-dd0313bf687a"
+    },
+    "annotations": {
+      "io.kubernetes.container.hash": "47366a05",
+      "io.kubernetes.container.restartCount": "0",
+      "io.kubernetes.container.terminationMessagePath": "/dev/termination-log",
+      "io.kubernetes.container.terminationMessagePolicy": "File",
+      "io.kubernetes.pod.terminationGracePeriod": "30"
+    },
+    "mounts": [
+      {
+        "containerPath": "/etc/hosts",
+        "hostPath": "/var/lib/kubelet/pods/b7c37a2c-db29-47d3-9550-dd0313bf687a/etc-hosts",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": false,
+        "selinuxRelabel": false
+      },
+      {
+        "containerPath": "/dev/termination-log",
+        "hostPath": "/var/lib/kubelet/pods/b7c37a2c-db29-47d3-9550-dd0313bf687a/containers/debugger-7w45n/43d71f8a",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": false,
+        "selinuxRelabel": false
+      }
+    ],
+    "logPath": "/var/log/pods/test-g8xb9-59dl6_b7c37a2c-db29-47d3-9550-dd0313bf687a/debugger-7w45n/0.log"
+  },
+  "info": {
+    "sandboxID": "ac9758a7e64f1e77361f795784640b85c10975199b35ff962abc543726258c62",
+    "pid": 254405,
+    "removing": false,
+    "snapshotKey": "765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7",
+    "snapshotter": "overlayfs",
+    "runtimeType": "io.containerd.runc.v2",
+    "runtimeOptions": {
+      "systemd_cgroup": true
+    },
+    "config": {
+      "metadata": {
+        "name": "debugger-7w45n"
+      },
+      "image": {
+        "image": "sha256:3db8720ecbf5f5927d409cc61f9b4f7ffe23283917caaa992f847c4d83338cc1"
+      },
+      "envs": [
+        {
+          "key": "KUBERNETES_PORT_443_TCP_ADDR",
+          "value": "172.20.0.1"
+        },
+        {
+          "key": "KUBERNETES_SERVICE_HOST",
+          "value": "172.20.0.1"
+        },
+        {
+          "key": "KUBERNETES_SERVICE_PORT",
+          "value": "443"
+        },
+        {
+          "key": "KUBERNETES_SERVICE_PORT_HTTPS",
+          "value": "443"
+        },
+        {
+          "key": "KUBERNETES_PORT",
+          "value": "tcp://172.20.0.1:443"
+        },
+        {
+          "key": "KUBERNETES_PORT_443_TCP",
+          "value": "tcp://172.20.0.1:443"
+        },
+        {
+          "key": "KUBERNETES_PORT_443_TCP_PROTO",
+          "value": "tcp"
+        },
+        {
+          "key": "KUBERNETES_PORT_443_TCP_PORT",
+          "value": "443"
+        }
+      ],
+      "mounts": [
+        {
+          "container_path": "/etc/hosts",
+          "host_path": "/var/lib/kubelet/pods/b7c37a2c-db29-47d3-9550-dd0313bf687a/etc-hosts"
+        },
+        {
+          "container_path": "/dev/termination-log",
+          "host_path": "/var/lib/kubelet/pods/b7c37a2c-db29-47d3-9550-dd0313bf687a/containers/debugger-7w45n/43d71f8a"
+        }
+      ],
+      "labels": {
+        "io.kubernetes.container.name": "debugger-7w45n",
+        "io.kubernetes.pod.name": "test-g8xb9-59dl6",
+        "io.kubernetes.pod.namespace": "main",
+        "io.kubernetes.pod.uid": "b7c37a2c-db29-47d3-9550-dd0313bf687a"
+      },
+      "annotations": {
+        "io.kubernetes.container.hash": "47366a05",
+        "io.kubernetes.container.restartCount": "0",
+        "io.kubernetes.container.terminationMessagePath": "/dev/termination-log",
+        "io.kubernetes.container.terminationMessagePolicy": "File",
+        "io.kubernetes.pod.terminationGracePeriod": "30"
+      },
+      "log_path": "debugger-7w45n/0.log",
+      "stdin": true,
+      "tty": true,
+      "linux": {
+        "resources": {
+          "cpu_period": 100000,
+          "cpu_shares": 2,
+          "oom_score_adj": 999,
+          "hugepage_limits": [
+            {
+              "page_size": "2MB"
+            },
+            {
+              "page_size": "1GB"
+            }
+          ]
+        },
+        "security_context": {
+          "namespace_options": {},
+          "run_as_user": {},
+          "supplemental_groups": [
+            1000
+          ],
+          "masked_paths": [
+            "/proc/asound",
+            "/proc/acpi",
+            "/proc/kcore",
+            "/proc/keys",
+            "/proc/latency_stats",
+            "/proc/timer_list",
+            "/proc/timer_stats",
+            "/proc/sched_debug",
+            "/proc/scsi",
+            "/sys/firmware"
+          ],
+          "readonly_paths": [
+            "/proc/bus",
+            "/proc/fs",
+            "/proc/irq",
+            "/proc/sys",
+            "/proc/sysrq-trigger"
+          ],
+          "seccomp": {
+            "profile_type": 1
+          }
+        }
+      }
+    },
+    "runtimeSpec": {
+      "ociVersion": "1.1.0-rc.1",
+      "process": {
+        "terminal": true,
+        "user": {
+          "uid": 0,
+          "gid": 0,
+          "additionalGids": [
+            0,
+            1000
+          ]
+        },
+        "args": [
+          "/bin/bash"
+        ],
+        "env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "TERM=xterm",
+          "HOSTNAME=test-g8xb9-59dl6",
+          "KUBERNETES_PORT_443_TCP_ADDR=172.20.0.1",
+          "KUBERNETES_SERVICE_HOST=172.20.0.1",
+          "KUBERNETES_SERVICE_PORT=443",
+          "KUBERNETES_SERVICE_PORT_HTTPS=443",
+          "KUBERNETES_PORT=tcp://172.20.0.1:443",
+          "KUBERNETES_PORT_443_TCP=tcp://172.20.0.1:443",
+          "KUBERNETES_PORT_443_TCP_PROTO=tcp",
+          "KUBERNETES_PORT_443_TCP_PORT=443"
+        ],
+        "cwd": "/",
+        "capabilities": {
+          "bounding": [
+            "CAP_CHOWN",
+            "CAP_DAC_OVERRIDE",
+            "CAP_FSETID",
+            "CAP_FOWNER",
+            "CAP_MKNOD",
+            "CAP_NET_RAW",
+            "CAP_SETGID",
+            "CAP_SETUID",
+            "CAP_SETFCAP",
+            "CAP_SETPCAP",
+            "CAP_NET_BIND_SERVICE",
+            "CAP_SYS_CHROOT",
+            "CAP_KILL",
+            "CAP_AUDIT_WRITE"
+          ],
+          "effective": [
+            "CAP_CHOWN",
+            "CAP_DAC_OVERRIDE",
+            "CAP_FSETID",
+            "CAP_FOWNER",
+            "CAP_MKNOD",
+            "CAP_NET_RAW",
+            "CAP_SETGID",
+            "CAP_SETUID",
+            "CAP_SETFCAP",
+            "CAP_SETPCAP",
+            "CAP_NET_BIND_SERVICE",
+            "CAP_SYS_CHROOT",
+            "CAP_KILL",
+            "CAP_AUDIT_WRITE"
+          ],
+          "permitted": [
+            "CAP_CHOWN",
+            "CAP_DAC_OVERRIDE",
+            "CAP_FSETID",
+            "CAP_FOWNER",
+            "CAP_MKNOD",
+            "CAP_NET_RAW",
+            "CAP_SETGID",
+            "CAP_SETUID",
+            "CAP_SETFCAP",
+            "CAP_SETPCAP",
+            "CAP_NET_BIND_SERVICE",
+            "CAP_SYS_CHROOT",
+            "CAP_KILL",
+            "CAP_AUDIT_WRITE"
+          ]
+        },
+        "oomScoreAdj": 999
+      },
+      "root": {
+        "path": "rootfs"
+      },
+      "mounts": [
+        {
+          "destination": "/proc",
+          "type": "proc",
+          "source": "proc",
+          "options": [
+            "nosuid",
+            "noexec",
+            "nodev"
+          ]
+        },
+        {
+          "destination": "/dev",
+          "type": "tmpfs",
+          "source": "tmpfs",
+          "options": [
+            "nosuid",
+            "strictatime",
+            "mode=755",
+            "size=65536k"
+          ]
+        },
+        {
+          "destination": "/dev/pts",
+          "type": "devpts",
+          "source": "devpts",
+          "options": [
+            "nosuid",
+            "noexec",
+            "newinstance",
+            "ptmxmode=0666",
+            "mode=0620",
+            "gid=5"
+          ]
+        },
+        {
+          "destination": "/dev/mqueue",
+          "type": "mqueue",
+          "source": "mqueue",
+          "options": [
+            "nosuid",
+            "noexec",
+            "nodev"
+          ]
+        },
+        {
+          "destination": "/sys",
+          "type": "sysfs",
+          "source": "sysfs",
+          "options": [
+            "nosuid",
+            "noexec",
+            "nodev",
+            "ro"
+          ]
+        },
+        {
+          "destination": "/sys/fs/cgroup",
+          "type": "cgroup",
+          "source": "cgroup",
+          "options": [
+            "nosuid",
+            "noexec",
+            "nodev",
+            "relatime",
+            "ro"
+          ]
+        },
+        {
+          "destination": "/etc/hosts",
+          "type": "bind",
+          "source": "/var/lib/kubelet/pods/b7c37a2c-db29-47d3-9550-dd0313bf687a/etc-hosts",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ]
+        },
+        {
+          "destination": "/dev/termination-log",
+          "type": "bind",
+          "source": "/var/lib/kubelet/pods/b7c37a2c-db29-47d3-9550-dd0313bf687a/containers/debugger-7w45n/43d71f8a",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ]
+        },
+        {
+          "destination": "/etc/hostname",
+          "type": "bind",
+          "source": "/var/lib/containerd/io.containerd.grpc.v1.cri/sandboxes/ac9758a7e64f1e77361f795784640b85c10975199b35ff962abc543726258c62/hostname",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ]
+        },
+        {
+          "destination": "/etc/resolv.conf",
+          "type": "bind",
+          "source": "/var/lib/containerd/io.containerd.grpc.v1.cri/sandboxes/ac9758a7e64f1e77361f795784640b85c10975199b35ff962abc543726258c62/resolv.conf",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ]
+        },
+        {
+          "destination": "/dev/shm",
+          "type": "bind",
+          "source": "/run/containerd/io.containerd.grpc.v1.cri/sandboxes/ac9758a7e64f1e77361f795784640b85c10975199b35ff962abc543726258c62/shm",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ]
+        }
+      ],
+      "annotations": {
+        "io.kubernetes.cri.container-name": "debugger-7w45n",
+        "io.kubernetes.cri.container-type": "container",
+        "io.kubernetes.cri.image-name": "docker.io/library/ubuntu:latest",
+        "io.kubernetes.cri.sandbox-id": "ac9758a7e64f1e77361f795784640b85c10975199b35ff962abc543726258c62",
+        "io.kubernetes.cri.sandbox-name": "test-g8xb9-59dl6",
+        "io.kubernetes.cri.sandbox-namespace": "main",
+        "io.kubernetes.cri.sandbox-uid": "b7c37a2c-db29-47d3-9550-dd0313bf687a"
+      },
+      "linux": {
+        "resources": {
+          "devices": [
+            {
+              "allow": false,
+              "access": "rwm"
+            }
+          ],
+          "memory": {},
+          "cpu": {
+            "shares": 2,
+            "period": 100000
+          }
+        },
+        "cgroupsPath": "kubepods-burstable-podb7c37a2c_db29_47d3_9550_dd0313bf687a.slice:cri-containerd:765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7",
+        "namespaces": [
+          {
+            "type": "pid",
+            "path": "/proc/252713/ns/pid"
+          },
+          {
+            "type": "ipc",
+            "path": "/proc/252713/ns/ipc"
+          },
+          {
+            "type": "uts",
+            "path": "/proc/252713/ns/uts"
+          },
+          {
+            "type": "mount"
+          },
+          {
+            "type": "network",
+            "path": "/proc/252713/ns/net"
+          }
+        ],
+        "maskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware"
+        ],
+        "readonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      }
+    }
+  }
+}'
+echo "An error message" > /dev/stderr
+fi
