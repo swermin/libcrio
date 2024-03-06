@@ -110,6 +110,7 @@ impl Cli {
         };
         Ok(pod.clone())
     }
+
     /// Returns a JSON value containing the pod inpection output
     ///
     /// # Arguments
@@ -158,6 +159,31 @@ impl Cli {
             None => vec!["ps", "-o", "json", "-p", pod_id],
         };
         run_command(ps_output_args, &self.bin_path)
+    }
+
+    /// Returns a JSON value containing the container inpection output
+    ///
+    /// # Arguments
+    ///
+    /// * `container_id` - The id of the container
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use libcrio::Cli;
+    /// let bin_path = format!("{}/mock/iks", env!("CARGO_MANIFEST_DIR"));
+    /// let cli = Cli {
+    ///     bin_path,
+    ///     ..Default::default()
+    /// };
+    /// let val = cli.inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7").unwrap();
+    /// ```
+    pub fn inspect_container(&self, container_id: &str) -> Result<Value, String> {
+        let inspect_output_args = match &self.config_path {
+            Some(s) => vec!["-c", s.as_str(), "inspect", container_id],
+            None => vec!["inspect", container_id],
+        };
+        run_command(inspect_output_args, &self.bin_path)
     }
 
     /// Returns a JSON value containing the images related to a container
@@ -566,6 +592,43 @@ mod tests {
         let val =
             cli.inspect_pod("51cd8bdaa13a65518e790d307359d33f9288fc82664879c609029b1a83862db6");
         let expected = Err(String::from("failed to create output from slice for [\"inspectp\", \"51cd8bdaa13a65518e790d307359d33f9288fc82664879c609029b1a83862db6\"] EOF while parsing a value at line 2 column 0"));
+        assert_eq!(expected, val);
+    }
+
+    #[test]
+    fn test_inspect_container() {
+        for cli in get_clis() {
+            let val = cli
+                .inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7")
+                .unwrap();
+            assert_eq!(val["info"]["pid"].as_i64().unwrap(), 254405)
+        }
+    }
+    #[test]
+    fn test_inspect_returns_a_container_mixed_errors_cli() {
+        let cli = get_mixed_errors_cli();
+        let val = cli.inspect_container("tests");
+        let expected = Err(String::from(
+            "stderr not empty - failed to execute crictl [\"inspect\", \"tests\"] An error message\n",
+        ));
+        assert_eq!(expected, val);
+    }
+
+    #[test]
+    fn test_inspect_container_only_errors_cli() {
+        let cli = get_only_errors_cli();
+        let val =
+            cli.inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7");
+        let expected = Err(String::from("failed to create output from slice for [\"inspect\", \"765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7\"] EOF while parsing a value at line 2 column 0"));
+        assert_eq!(expected, val);
+    }
+
+    #[test]
+    fn test_inspect_container_bad_json_cli() {
+        let cli = get_bad_json_cli();
+        let val =
+            cli.inspect_container("765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7");
+        let expected = Err(String::from("failed to create output from slice for [\"inspect\", \"765312810c818bca4836c3598e21471bfd96be8ca84ca952290a9900b7c055a7\"] EOF while parsing a value at line 2 column 0"));
         assert_eq!(expected, val);
     }
 
